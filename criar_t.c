@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include "funcoes.h"
 
-void criar_t(){
+void criar_t(FILE *bd){
 	FILE *arquivo;
-	FILE *bd;
+
 	char nome_t[50];
 	char nome_c[50];
 	int tipo_c = 0;
@@ -20,7 +20,6 @@ void criar_t(){
 	scanf("%s",nome_t);
 	printf("\n");
 	arquivo = fopen(nome_t,"a");
-
 	if(arquivo == NULL){
 		printf("Erro na criacao/abertura do arquivo!\n");
 		exit(1);
@@ -63,9 +62,7 @@ void criar_t(){
 			printf("Deseja acrescentar uma nova coluna: (s/n)\n");
 			scanf(" %c", &opc);
 		}
-		bd = fopen("BD ITP.txt","a");
 		fprintf(bd, "|%s|\n", nome_t);
 	}
 	fclose(arquivo);
-	fclose(bd);
 }
