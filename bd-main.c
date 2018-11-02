@@ -32,8 +32,32 @@ void main(){
 	scanf("%d", &opr);
 		switch(opr){
 			case 1:
+				bd = fopen("BD-ITP.txt","a+");
 				criar_t(bd);
 				ntabelas = ntabelas + 1;
+				if (bd == NULL){
+					printf("Erro na abertura do arquivo!");
+					exit(1);
+				}
+				newbd = fopen("newbd.txt","w");
+				if (newbd == NULL){
+					printf("Erro na abertura do arquivo!");
+					exit(1);
+				}else{
+					fprintf(newbd,"|ntabelas = %d|\n", ntabelas);
+					char *nome_t = malloc(sizeof(char)*100);
+					rewind(bd);
+					fscanf(bd, "|ntabelas = %d|", &desc);
+					for(int i=0; i < ntabelas; i++){
+						fscanf(bd, "%s", nome_t);
+						fprintf(newbd, "%s\n", nome_t);
+					}
+					free(nome_t);
+				}
+				fclose(newbd);
+				fclose(bd);
+				remove("BD-ITP.txt");
+				rename("newbd.txt","BD-ITP.txt");
 				break;
 			case 2:
 				printf("indisponivel!\n");
@@ -42,7 +66,9 @@ void main(){
 				printf("indisponivel!\n");
 				break;
 			case 4:
-				printf("indisponivel!\n");
+				bd = fopen("BD-ITP.txt","r");
+				listar_t(bd);
+				fclose(bd);
 				break;
 			case 5:
 				printf("Programa finalizado!\n");
@@ -55,9 +81,9 @@ void main(){
 		scanf(" %c",&opc);
 	}while(opc == 's');
 	printf("Programa finalizado!\n");
-	newbd = fopen("newbd.txt","w");
+	//newbd = fopen("newbd.txt","w");
 
-	if (newbd == NULL){
+	/*if (newbd == NULL){
 		printf("Erro na abertura do arquivo!");
 		exit(1);
 	}else{
@@ -74,6 +100,6 @@ void main(){
 	fclose(newbd);
 	fclose(bd);
 	remove("BD-ITP.txt");
-	rename("newbd.txt","BD-ITP.txt");
+	rename("newbd.txt","BD-ITP.txt");*/
 	exit(1);
 }
