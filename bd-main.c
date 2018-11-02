@@ -15,12 +15,12 @@ void main(){
 		exit(1);
 	}
 
-	fseek(bd, 0, SEEK_END); // goto end of file
+	fseek(bd, 0, SEEK_END); 
 	if (ftell(bd) == 0){
       	fprintf(bd, "|ntabelas = %d|\n", 0);
  	}
 	fseek(bd, 0, SEEK_SET);
-		//fprintf(bd, "|ntabelas = %d|\n", 0);
+		
 	
 	fscanf(bd,"|ntabelas = %d|\n", &ntabelas);
 	
@@ -81,25 +81,5 @@ void main(){
 		scanf(" %c",&opc);
 	}while(opc == 's');
 	printf("Programa finalizado!\n");
-	//newbd = fopen("newbd.txt","w");
-
-	/*if (newbd == NULL){
-		printf("Erro na abertura do arquivo!");
-		exit(1);
-	}else{
-		fprintf(newbd,"|ntabelas = %d|\n", ntabelas);
-		char *nome_t = malloc(sizeof(char)*100);
-		rewind(bd);
-		fscanf(bd, "|ntabelas = %d|", &desc);
-		for(int i=0; i < ntabelas; i++){
-			fscanf(bd, "%s", nome_t);
-			fprintf(newbd, "%s\n", nome_t);
-		}
-		free(nome_t);
-	}
-	fclose(newbd);
-	fclose(bd);
-	remove("BD-ITP.txt");
-	rename("newbd.txt","BD-ITP.txt");*/
 	exit(1);
 }
