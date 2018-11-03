@@ -23,7 +23,7 @@ void main(){
 				printf("indisponivel!\n");
 				break;
 			case 4:
-				printf("indisponivel!\n");
+				listar_t();
 				break;
 			case 5:
 				printf("Programa finalizado!\n");
