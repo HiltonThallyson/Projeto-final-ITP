@@ -15,11 +15,12 @@ void main(){
 		exit(1);
 	}
 
-  fseek(bd, 0, SEEK_END); 
+  	fseek(bd, 0, SEEK_END); 
 
 	if (ftell(bd) == 0){
-      	fprintf(bd, "|ntabelas = %d|\n", 0);
+      		fprintf(bd, "|ntabelas = %d|\n", 0);
  	}
+	
 	fseek(bd, 0, SEEK_SET);		
 	
 	fscanf(bd,"|ntabelas = %d|\n", &ntabelas);
