@@ -94,10 +94,10 @@ void criar_t(){
 			printf("Deseja acrescentar uma nova coluna: (s/n)\n");
 			scanf(" %c", &opc);
 		}
-    bd = fopen("BD-ITP.txt", "a");
+    		bd = fopen("BD-ITP.txt", "a");
 		fprintf(bd, "|%s|\n", nome_t);
 	}
-  fclose(bd);
+  	fclose(bd);
 	fclose(arquivo);
 }
 
