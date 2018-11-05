@@ -31,14 +31,10 @@ void main(){
 	scanf("%d", &opr);
 		switch(opr){
 			case 1:
-				bd = fopen("BD-ITP.txt","a+");
-				criar_t(bd);
+				criar_t();
 				ntabelas = ntabelas + 1;
-				if (bd == NULL){
-					printf("Erro na abertura do arquivo!");
-					exit(1);
-				}
 				newbd = fopen("newbd.txt","w");
+				bd = fopen("BD-ITP.txt", "r");
 				if (newbd == NULL){
 					printf("Erro na abertura do arquivo!");
 					exit(1);

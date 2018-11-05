@@ -21,19 +21,18 @@ int valida_chave(char chave[6]){
 
 void criar_t(){
 	FILE *arquivo;
-  FILE *bd;
+  	FILE *bd;
 	char nome_arq[55];
 	char nome_t[50];
 	char nome_c[50];
 	
-  int tipo_c = 0;
-	//int chave;
+  	int tipo_c = 0;//tipo do dado inserido
 	char chave[6];
-	char opc;
+	char opc;//opcao
 	int valor_i = 0;
 	float valor_f = 0;
 	double valor_d = 0;
-	char valor_c[50];
+	char valor_c[50];//valor da coluna
 
 	printf("---------Criando nova tabela---------\n");
 	printf("Digite o nome da tabela: ");
@@ -57,7 +56,7 @@ void criar_t(){
 		if(valida_chave(chave)==0){
 			do{
 				printf("Digite o valor INTEIRO da primeira coluna: ");
-				scanf("%s",&chave);
+				scanf("%s",chave);
 			}while(valida_chave(chave)==0);
 		}
 		fprintf(arquivo, "|ID = %s|",chave);
@@ -94,7 +93,7 @@ void criar_t(){
 			printf("Deseja acrescentar uma nova coluna: (s/n)\n");
 			scanf(" %c", &opc);
 		}
-    		bd = fopen("BD-ITP.txt", "a");
+    	bd = fopen("BD-ITP.txt", "a");
 		fprintf(bd, "|%s|\n", nome_t);
 	}
   	fclose(bd);
