@@ -38,7 +38,6 @@ void criar_t(){
 	printf("Digite o nome da tabela: ");
 	scanf("%s",nome_t);
 	printf("\n");
-
 	strcpy(nome_arq,nome_t);
 	strcat(nome_arq,".txt");
 	arquivo = fopen(nome_arq,"a");
@@ -51,12 +50,13 @@ void criar_t(){
 		fprintf(arquivo, "|Tabela - %s|\n", nome_t);
 		printf("Criando a primeira coluna: ID\n");
 		printf("Digite o valor da primeira coluna: ");
-		//scanf("%d",&chave);
-		scanf("%s",chave);
+		getchar();
+		scanf("%[^\n]s",chave);
 		if(valida_chave(chave)==0){
 			do{
 				printf("Digite o valor INTEIRO da primeira coluna: ");
-				scanf("%s",chave);
+				getchar();
+				scanf("%[^\n]s",chave);
 			}while(valida_chave(chave)==0);
 		}
 		fprintf(arquivo, "|ID = %s|",chave);
@@ -65,7 +65,8 @@ void criar_t(){
 		scanf(" %c", &opc);
 		while(opc == 's'){
 			printf("Digite o nome da coluna: ");
-			scanf("%s",nome_c);
+			getchar();
+			scanf("%[^\n]s",nome_c);
 			printf("\n");
 			printf("Qual o tipo de dado a ser inserido na coluna:\n");
 			printf("(1) - int\n(2) - float\n(3) - double\n(4) - char\n");
@@ -86,7 +87,8 @@ void criar_t(){
 					fprintf(arquivo,"%s = %lf|", nome_c, valor_d);
 					break;
 				case 4:
-					scanf(" %s", valor_c);
+					getchar();
+					scanf("%[^\n]s", valor_c);
 					fprintf(arquivo,"%s = %s|", nome_c, valor_c);
 					break;
 			}
