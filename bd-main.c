@@ -24,7 +24,7 @@ void main(){
 	fseek(bd, 0, SEEK_SET);		
 	
 	fscanf(bd,"|ntabelas = %d|\n", &ntabelas);
-	
+	fclose(bd);
 	do{
 	printf("Selecione a operacao desejada:\n");
 	printf("(1) - Criar nova tabela\n(2) - Acrescentar nova linha\n(3) - Acrescentar nova coluna\n(4)- Listar tabelas\n(5) - Sair\n");
