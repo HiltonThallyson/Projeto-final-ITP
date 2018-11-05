@@ -12,7 +12,7 @@ void main(){
 	bd = fopen("BD-ITP.txt","a+");
 	if (bd == NULL){
 		printf("Erro na abertura do arquivo!");
-		exit(1);
+		exit(1);//finalizar todo o programa.
 	}
 	
 	//verifica se o arquivo bd está vazio ou não.
@@ -80,5 +80,5 @@ void main(){
 	}while(opc == 's');
 	
 	printf("Programa finalizado!\n");
-	exit(1);
+	exit(0);//finaliza o programa com sucesso.
 }
