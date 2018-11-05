@@ -15,17 +15,15 @@ void main(){
 		exit(1);
 	}
 
-	fseek(bd, 0, SEEK_END); 
+  fseek(bd, 0, SEEK_END); 
+
 	if (ftell(bd) == 0){
       	fprintf(bd, "|ntabelas = %d|\n", 0);
  	}
-	fseek(bd, 0, SEEK_SET);
-		
+	fseek(bd, 0, SEEK_SET);		
 	
 	fscanf(bd,"|ntabelas = %d|\n", &ntabelas);
 	
-	
-
 	do{
 	printf("Selecione a operacao desejada:\n");
 	printf("(1) - Criar nova tabela\n(2) - Acrescentar nova linha\n(3) - Acrescentar nova coluna\n(4)- Listar tabelas\n(5) - Sair\n");
@@ -66,9 +64,7 @@ void main(){
 				printf("indisponivel!\n");
 				break;
 			case 4:
-				bd = fopen("BD-ITP.txt","r");
-				listar_t(bd);
-				fclose(bd);
+				listar_t();
 				break;
 			case 5:
 				printf("Programa finalizado!\n");
