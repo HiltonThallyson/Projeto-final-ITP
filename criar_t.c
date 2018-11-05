@@ -65,8 +65,7 @@ void criar_t(){
 		scanf(" %c", &opc);
 		while(opc == 's'){
 			printf("Digite o nome da coluna: ");
-			getchar();
-			scanf("%[^\n]s",nome_c);
+			scanf("%s",nome_c);
 			printf("\n");
 			printf("Qual o tipo de dado a ser inserido na coluna:\n");
 			printf("(1) - int\n(2) - float\n(3) - double\n(4) - char\n");
