@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "funcoes.h"
 
+
 void listar_t(){
 	FILE *bd;
 	char *nome_t = malloc(sizeof(char)*100);

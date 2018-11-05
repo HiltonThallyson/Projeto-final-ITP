@@ -4,6 +4,7 @@
 #include <string.h>
 #include "funcoes.h"
 
+
 int valida_chave(char chave[6]){
 	int i,n=0;		
 	for(i=0;i<strlen(chave);i++){
@@ -18,13 +19,14 @@ int valida_chave(char chave[6]){
 	}	
 }
 
-void criar_t(FILE *bd){
+void criar_t(){
 	FILE *arquivo;
-	FILE *bd;
+  FILE *bd;
 	char nome_arq[55];
 	char nome_t[50];
 	char nome_c[50];
-	int tipo_c = 0;
+	
+  int tipo_c = 0;
 	//int chave;
 	char chave[6];
 	char opc;
@@ -37,6 +39,7 @@ void criar_t(FILE *bd){
 	printf("Digite o nome da tabela: ");
 	scanf("%s",nome_t);
 	printf("\n");
+
 	strcpy(nome_arq,nome_t);
 	strcat(nome_arq,".txt");
 	arquivo = fopen(nome_arq,"a");
@@ -91,7 +94,10 @@ void criar_t(FILE *bd){
 			printf("Deseja acrescentar uma nova coluna: (s/n)\n");
 			scanf(" %c", &opc);
 		}
+    bd = fopen("BD-ITP.txt", "a");
 		fprintf(bd, "|%s|\n", nome_t);
 	}
+  fclose(bd);
 	fclose(arquivo);
 }
+

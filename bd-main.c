@@ -15,15 +15,14 @@ void main(){
 		exit(1);
 	}
 
-	fseek(bd, 0, SEEK_END); // goto end of file
+  fseek(bd, 0, SEEK_END); 
+
 	if (ftell(bd) == 0){
       	fprintf(bd, "|ntabelas = %d|\n", 0);
  	}
-	fseek(bd, 0, SEEK_SET);
-		//fprintf(bd, "|ntabelas = %d|\n", 0);
+	fseek(bd, 0, SEEK_SET);		
 	
 	fscanf(bd,"|ntabelas = %d|\n", &ntabelas);
-	fclose(bd);
 	
 	do{
 	printf("Selecione a operacao desejada:\n");
