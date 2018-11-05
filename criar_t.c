@@ -64,7 +64,7 @@ void criar_t(){
 		printf("Deseja acrescentar uma nova coluna: (s/n)\n");
 		scanf(" %c", &opc);
 		while(opc == 's'){
-			printf("Digite o nome da coluna: ");
+			printf("Digite o nome da coluna(sem espaços): ");
 			scanf("%s",nome_c);
 			printf("\n");
 			printf("Qual o tipo de dado a ser inserido na coluna:\n");
