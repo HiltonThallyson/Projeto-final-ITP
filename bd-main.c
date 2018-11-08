@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "funcoes.h"
-
+#include "structs.h"
 void main(){
 	int opr = 0, ntabelas = 0, desc = 0;// opr = operação a ser realizada, desc = variável temporária para pular linha no bd
 	char opc = 's';//opc - opção de continuar executando novos comandos ou não.
@@ -69,7 +69,7 @@ void main(){
 					break;
 				case 5:
 					printf("Programa finalizado!\n");//sai do programa com exit(1).
-					exit(1);
+					exit(0);
 				default:
 					printf("Operacao invalida!\n");
 			}
