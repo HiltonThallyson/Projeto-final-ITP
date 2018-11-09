@@ -9,7 +9,7 @@ void main(){
 	FILE *bd;
 	FILE *newbd; // arquivo que vai receber a atualização de bd.
 	//abertura do arquivo que recebe todas as tabelas.
-	bd = fopen("BD-ITP.txt","a+");
+	bd = fopen("BD-ITP","a+");
 	if (bd == NULL){
 		printf("Erro na abertura do arquivo!");
 		exit(1);//finalizar todo o programa.
@@ -35,8 +35,8 @@ void main(){
 				case 1:
 					criar_t();//chama a função de criar tabela.
 					ntabelas = ntabelas + 1;//incrementa o número de tabelas.
-					newbd = fopen("newbd.txt","w");//abre newbd como escrita
-					bd = fopen("BD-ITP.txt", "r");//abre bd como leitura
+					newbd = fopen("newbd","w");//abre newbd como escrita
+					bd = fopen("BD-ITP", "r");//abre bd como leitura
 					//checa se o arquivo de newbd foi aberto corretamente.
 					if (newbd == NULL){
 						printf("Erro na abertura do arquivo!");
@@ -55,11 +55,11 @@ void main(){
 					}
 					fclose(newbd);//fecha newbd
 					fclose(bd);//fecha bd
-					remove("BD-ITP.txt");//remove o arquivo em bd.
-					rename("newbd.txt","BD-ITP.txt");//muda o nome de newbd.txt para BD-ITP, tomando o lugar do arquivo bd original.
+					remove("BD-ITP");//remove o arquivo em bd.
+					rename("newbd","BD-ITP");//muda o nome de newbd.txt para BD-ITP, tomando o lugar do arquivo bd original.
 					break;
 				case 2:
-					printf("indisponivel!\n");
+					criar_l();
 					break;
 				case 3:
 					printf("indisponivel!\n");

@@ -8,7 +8,7 @@ void listar_t(){
 	char *nome_t = malloc(sizeof(char)*100);//aloca espaço para uma string de tamanho 100.
 	int ntabelas;//variável para armazenar o n de tabelas.
 
-	bd = fopen("BD-ITP.txt", "r");//abre o arquivo BD-ITP.txt em modo leitura.
+	bd = fopen("BD-ITP", "r");//abre o arquivo BD-ITP.txt em modo leitura.
 	//checa se o arqivo foi aberto corretamente:
 	if (bd == NULL){
 		printf("Erro na abertura do arquivo!");
