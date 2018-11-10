@@ -32,7 +32,7 @@ void criar_t(){
 		tipo_var->nome_c = malloc(sizeof(char)*100);
 		scanf("%s",tipo_var->nome_c);//armazena o nome da nova tabela, tendo de ser um nome simples sem espaços
 		printf("\n");
-		fprintf(arquivo,"|%s <unsigned int>|",tipo_var->nome_c);
+		fprintf(arquivo,"|%s<unsigned int>|",tipo_var->nome_c);
 		printf("Deseja acrescentar uma nova coluna: (s/n)\n");
 		scanf(" %c", &opc);//armazena opção do usuario de adicionar ou não mais uma coluna
 		while(opc == 's'){
@@ -45,7 +45,7 @@ void criar_t(){
 			getchar();
 			scanf("%s", tipo_c);//usuario insere um dos inteiros indicados acima que corresponde a um dos 4 tipos primarios
 			printf("\n");
-			fprintf(arquivo,"%s <%s>|", tipo_var->nome_c, tipo_c);	
+			fprintf(arquivo,"%s<%s>|", tipo_var->nome_c, tipo_c);	
 			free(tipo_c);	
 			printf("Deseja acrescentar uma nova coluna: (s/n)\n");//pergunta novmente ao usuário se ele deseja adicionar outra coluna
 			scanf(" %c", &opc);//se 's' então voltamos ao inicio do while, se 'n' o programa prossegue para o próximo comando

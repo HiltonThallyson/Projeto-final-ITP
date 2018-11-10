@@ -23,9 +23,11 @@ void criar_l(){
 	FILE *arquivo;
 	char opc = 's';
 	int r = 0, i = 0;
-	int cont = 0, j=0, k=0, t=0;
+	int cont = 0, j=0, k=0, t=0, g=0, h=0, u=0;
 	char tipos[100][20];
+	char nome_colunas[100][50];
 	char string[300];
+	char *temp;
 	variaveis *tipo_var = malloc(sizeof(variaveis));
 	tipo_var->chave = malloc(sizeof(char)*100);
 	tipo_var->valor_c = malloc(sizeof(char)*100);
@@ -41,9 +43,7 @@ void criar_l(){
 		exit(1);
 	}
 	else{
-		fseek(arquivo,0,SEEK_SET);
 		fscanf(arquivo, "%[^\n]s", string);
-		fclose(arquivo);
 		for (i; i<strlen(string);i++){
 			if(string[i] == '<'){
 				j=i+1;
@@ -55,23 +55,58 @@ void criar_l(){
 				tipos[t][k] = '\0';
 				t++;
 				k=0;
+			}else if(string[i]=='|'){
+				j=i+1;
+				while(string[j]!='<' && string[j]!='\n'){
+					nome_colunas[h][u] = string[j];
+					u++;
+					j++;
+				}
+				nome_colunas[h][u] = '\0';
+				h++;
+				u=0;
 			}
 		}
-		arquivo = fopen(tipo_var->nome_t,"a");
-		free(tipo_var->nome_t);
 	}
+
 	do{	
 		i=0;
 		do{
-			printf("Digite o valor da chave(inteiro): ");
+			printf("Digite o valor da chave(%s):",nome_colunas[0]);
 			scanf("%s",tipo_var->chave);
 			r = valida_chave(tipo_var->chave);
 		}while (r == 0);
+		fclose(arquivo);
+		arquivo = fopen(tipo_var->nome_t,"r");
+		while (fgets(string,300,arquivo)){
+			g=0;
+			temp = malloc(sizeof(char)*50);
+			while(string[g+1]!='|'){
+				temp[g] = string[g+1];
+				g++;
+			}				 
+			if(strcmp(temp,tipo_var->chave)==0){
+				do{
+					printf("Chave já existe!! Digite o valor da chave(%s):",nome_colunas[0]);
+					scanf("%s",tipo_var->chave);
+					r = valida_chave(tipo_var->chave);
+				}while (r == 0);
+				rewind(arquivo);
+			}
+			free(temp);
+		}
+		fclose(arquivo);
 
+		arquivo = fopen(tipo_var->nome_t,"a");
+
+		if (arquivo == NULL){
+		printf("Erro na abertura do arquivo!");
+		exit(1);
+		}
 		fprintf(arquivo,"|%s|", tipo_var->chave);
 		i=1;
-		while (i!=t){
-			printf("Digite o valor da coluna(%s):",tipos[i]);
+		while (i!=h-1){
+			printf("Digite o valor da coluna(%s):",nome_colunas[i]);
 			if (strcmp(tipos[i],"int")==0){
 				scanf("%d",&tipo_var->valor_i);
 				fprintf(arquivo, "%d|",tipo_var->valor_i);
@@ -94,5 +129,6 @@ void criar_l(){
 	fclose(arquivo);
 	free(tipo_var->valor_c);
 	free(tipo_var->chave);
+	free(tipo_var->nome_t);
 	free(tipo_var);
 }
