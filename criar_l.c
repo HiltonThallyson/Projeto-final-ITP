@@ -21,14 +21,14 @@ int valida_chave(char *chave){
 
 int valida_float(char *valor){
 	int i,n=0,ponto=0;		
-	for(i=0;i<strlen(valor);i++){//percorre cada caractere da string chave até ante do \0
-		if(isdigit(valor[i])!=0){//se o char for um digito, o contato recebe ele mesmo + 1
+	for(i=0;i<strlen(valor);i++){//percorre cada caractere da string chave até antes do \0
+		if(isdigit(valor[i])!=0){//se o char for um digito, o contador recebe ele mesmo + 1
 			n++;
 		}else if(valor[i]=='.'){
 			ponto++;
 		}
 	}
-	if(n==strlen(valor)||(n==strlen(valor)-1&&ponto==1)){
+	if(n==strlen(valor)-1 && ponto==1){
 		return 1;
 	}else{
 		return 0;
@@ -37,34 +37,35 @@ int valida_float(char *valor){
 
 void criar_l(){
 	FILE *arquivo;
-	char opc = 's';
-	int r = 0, i = 0;
-	int cont = 0, j=0, k=0, t=0, g=0, h=0, u=0;
-	char tipos[100][20];
-	char nome_colunas[100][50];
-	char string[300];
-	char *temp;
+	char opc = 's';//variavel que armazena a opcao de criar um nova linha ou nao;
+	int i = 0, j = 0, k = 0, t = 0, g = 0, h = 0, u = 0; // contadores;
+	int r = 0; // variavel que recebe o resultado dos testes de tipo;
+	char tipos[100][20];//vetor de strings que armazena os tipos de valores das colunas;
+	char nome_colunas[100][50];//vetor de strings que armazena os nomes de valores das colunas;
+	char string[300];//string que armazena cada linha do arquivo 1 por vez;
+	char *temp;//string que recebe o valor da chave primaria;
 	variaveis *tipo_var = malloc(sizeof(variaveis));
 	tipo_var->chave = malloc(sizeof(char)*100);
 	tipo_var->valor_c = malloc(sizeof(char)*100);
-	int n=0;
-
+	
+	//recebe o nome da tabela e abre o arquivo desejado;
 	printf("Selecione a tabela: ");
 	tipo_var->nome_t = malloc(sizeof(char)*100);
-	scanf("%s",tipo_var->nome_t);//armazena o nome da nova tabela, tendo de ser um nome simples sem espaços
+	scanf("%s",tipo_var->nome_t);
 	printf("\n");
-	arquivo = fopen(tipo_var->nome_t,"r");//abre arquivo nome_arquivo para anexar, caso ainda não exista é criado e se existe, o texto
+	arquivo = fopen(tipo_var->nome_t,"r");
 	if (arquivo == NULL){
 		printf("Erro na abertura do arquivo!");
 		exit(1);
 	}
 	else{
-		fscanf(arquivo, "%[^\n]s", string);
+		fscanf(arquivo, "%[^\n]s", string);//le a primeira linha do arquivo com os nomes das colunas e tipos de valores;
+		//armazena nos devidoes vetores os tipos e nomes das colunas
 		for (i; i<strlen(string);i++){
 			if(string[i] == '<'){
 				j=i+1;
 				while (string[j]!='>'){
-					tipos[t][k] = string[j];
+					tipos[t][k] = string[j];//armazena tipos;
 					k++;
 					j++;
 				}
@@ -74,7 +75,7 @@ void criar_l(){
 			}else if(string[i]=='|'){
 				j=i+1;
 				while(string[j]!='<' && string[j]!='\n'){
-					nome_colunas[h][u] = string[j];
+					nome_colunas[h][u] = string[j];//armazena nomes das colunas;
 					u++;
 					j++;
 				}
@@ -84,25 +85,28 @@ void criar_l(){
 			}
 		}
 	}
-
+	//loop para adicionar linha enquanto o usuario desejar;
 	do{	
 		i=0;
 		do{
 			printf("Digite o valor da chave(%s):",nome_colunas[0]);
 			scanf("%s",tipo_var->chave);
-			r = valida_chave(tipo_var->chave);
+			r = valida_chave(tipo_var->chave);//testa se chave e inteiro;
 		}while (r == 0);
-		fclose(arquivo);
-		arquivo = fopen(tipo_var->nome_t,"r");
+		fclose(arquivo);//fecha o arquivo para salvar as informacoes editadas de cada loop
+		arquivo = fopen(tipo_var->nome_t,"r");//abre novamente o arquivo para leitura;
+		//loop que le linha por linha ate ler a ultima linha;
 		while (fgets(string,300,arquivo)){
 			g=0;
 			temp = malloc(sizeof(char)*50);
+			//le a string a partir do char | enquanto nao achar outro |;
 			while(string[g+1]!='|'){
-				temp[g] = string[g+1];
+				temp[g] = string[g+1];//armazena characteres da chave no temp;
 				g++;
 			}				 
-			if(strcmp(temp,tipo_var->chave)==0){
+			if(strcmp(temp,tipo_var->chave)==0){//testa se existe a chave no arquivo;
 				do{
+					//caso exista, pede outra chave e testa se ela e int;
 					printf("Chave já existe!! Digite o valor da chave(%s):",nome_colunas[0]);
 					scanf("%s",tipo_var->chave);
 					r = valida_chave(tipo_var->chave);
@@ -112,7 +116,7 @@ void criar_l(){
 			free(temp);
 		}
 		fclose(arquivo);
-
+		//depois de verificado se a chave inserida nao existe no arquivo, comeca a leitura dos dados das colunas;
 		arquivo = fopen(tipo_var->nome_t,"a");
 
 		if (arquivo == NULL){
@@ -121,8 +125,9 @@ void criar_l(){
 		}
 		fprintf(arquivo,"|%s|", tipo_var->chave);
 		i=1;
-		while (i!=h-1){
+		while (i!=h-1){//varia i da primeira coluna a ultima;
 			printf("Digite o valor da coluna(%s):",nome_colunas[i]);
+			//testa se o usuario inseriu o valor da coluna com o tipo correto da mesma;
 			if (strcmp(tipos[i],"int")==0){
 				do{
 					scanf("%s",tipo_var->valor_c);

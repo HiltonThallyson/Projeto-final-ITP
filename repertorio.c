@@ -1,7 +1,7 @@
 
 #include <ctype.h>//necessaria por causa da funcao isdigit
 //funcao para verificar se o conteudo recebido para a coluna ID é mesmo um inteiro, sem caracteres entre os digitos 
-int valida_chave(char chave[6]){
+int valida_chave(char *chave){
 	int i,n=0;		
 	for(i=0;i<strlen(chave);i++){//percorre cada caractere da string chave até ante do \0
 		if(isdigit(chave[i])!=0){//se o char for um digito, o contato recebe ele mesmo + 1
@@ -14,6 +14,7 @@ int valida_chave(char chave[6]){
 		return 0;
 	}	
 }
+
 int valida_float(char *valor){
 	int i,n=0,ponto=0;		
 	for(i=0;i<strlen(valor);i++){//percorre cada caractere da string chave até ante do \0
@@ -23,12 +24,13 @@ int valida_float(char *valor){
 			ponto++;
 		}
 	}
-	if(n==strlen(valor)||(n==strlen(valor)-1&&ponto==1)){
+	if(n==strlen(valor)-1&&ponto==1){
 		return 1;
 	}else{
 		return 0;
 	}	
 }
+
 
 //leitura de valores
 int valor_i = 0;//variavel que armazenará o conteudo da coluna caso o usuario escolha a coluna do tipo inteiro
