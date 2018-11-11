@@ -14,7 +14,21 @@ int valida_chave(char chave[6]){
 		return 0;
 	}	
 }
-
+int valida_float(char valor[6]){
+	int i,n=0,ponto=0;		
+	for(i=0;i<strlen(valor);i++){//percorre cada caractere da string chave até ante do \0
+		if(isdigit(valor[i])!=0){//se o char for um digito, o contato recebe ele mesmo + 1
+			n++;
+		}else if(valor[i]=='.'){
+			ponto++;
+		}
+	}
+	if(n==strlen(valor)||(n==strlen(valor)-1&&ponto==1)){
+		return 1;
+	}else{
+		return 0;
+	}	
+}
 
 //leitura de valores
 int valor_i = 0;//variavel que armazenará o conteudo da coluna caso o usuario escolha a coluna do tipo inteiro
