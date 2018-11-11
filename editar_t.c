@@ -6,18 +6,19 @@
 #include "structs.h"
 
 int valida_chave(char *chave);
-
+int valida_float(char *valor);
 
 void editar_t(){
 	FILE *arquivo;
 	FILE *newfile;
 	variaveis *tipo_var = malloc(sizeof(variaveis));
-	int r = 0, i = 0;
+	int r = 0, i = 0, tem_chave = 0;
 	int cont = 0, j=0, k=0, t=0, g=0, h=0, u=0;
 	char tipos[100][20];
 	char nome_colunas[100][50];
 	char string[300];
 	char *temp;
+	char opc = 's';
 	tipo_var->chave = malloc(sizeof(char)*100);
 	tipo_var->valor_c = malloc(sizeof(char)*100);
 
@@ -55,14 +56,17 @@ void editar_t(){
 			}
 		}
 	}
-	do{
-		printf("Digite o valor da chave(%s):",nome_colunas[0]);
-		scanf("%s",tipo_var->chave);
-		r = valida_chave(tipo_var->chave);
-	}while (r == 0);
-	rewind(arquivo);
-	newfile = fopen("newfile","w");
-	while (fgets(string,300,arquivo)){
+	fclose(arquivo);
+	while (opc == 's'){
+		do{
+			printf("Digite o valor da chave(%s):",nome_colunas[0]);
+			scanf("%s",tipo_var->chave);
+			r = valida_chave(tipo_var->chave);
+		}while (r == 0);
+
+		arquivo = fopen(tipo_var->nome_t,"r");
+		newfile = fopen("newfile","w");
+		while (fgets(string,300,arquivo)){
 			g=0;
 			temp = malloc(sizeof(char)*50);
 			while(string[g+1]!='|'){
@@ -71,18 +75,37 @@ void editar_t(){
 			}
 			i=1;				 
 			if(strcmp(temp,tipo_var->chave)==0){
+				tem_chave = 1;
 				fprintf(newfile,"|%s|",temp);
 				do{
 					printf("Digite o valor da coluna(%s):",nome_colunas[i]);
 					if (strcmp(tipos[i],"int")==0){
-						scanf("%d",&tipo_var->valor_i);
-						fprintf(newfile, "%d|",tipo_var->valor_i);
+						do{
+							scanf("%s",tipo_var->valor_c);
+							r = valida_chave(tipo_var->valor_c);
+							if(r==0){
+								printf("tipo invalido! Digite o valor da coluna(%s):",nome_colunas[i]);
+							}
+						}while(r==0);
+						fprintf(newfile, "%s|",tipo_var->valor_c);
 					}else if(strcmp(tipos[i],"float")==0){
-						scanf("%f",&tipo_var->valor_f);
-						fprintf(newfile, "%f|",tipo_var->valor_f);
+						do{
+							scanf("%s",tipo_var->valor_c);
+							r = valida_float(tipo_var->valor_c);
+							if(r==0){
+								printf("tipo invalido! Digite o valor da coluna(%s):",nome_colunas[i]);
+							}
+						}while(r==0);
+						fprintf(newfile, "%s|",tipo_var->valor_c);
 					}else if(strcmp(tipos[i],"double")==0){
-						scanf("%lf",&tipo_var->valor_d);
-						fprintf(newfile, "%f|",tipo_var->valor_f);
+						do{
+							scanf("%s",tipo_var->valor_c);
+							r = valida_float(tipo_var->valor_c);
+							if(r==0){
+								printf("tipo invalido! Digite o valor da coluna(%s):",nome_colunas[i]);
+							}
+						}while(r==0);
+						fprintf(newfile, "%s|",tipo_var->valor_c);
 					}else if(strcmp(tipos[i],"char")==0){
 						scanf("%s",tipo_var->valor_c);
 						fprintf(newfile, "%s|",tipo_var->valor_c);
@@ -95,11 +118,17 @@ void editar_t(){
 			}
 			free(temp);
 		}
-
-	fclose(arquivo);
-	fclose(newfile);
-	remove(tipo_var->nome_t);
-	rename("newfile",tipo_var->nome_t);
+		if(tem_chave==0){
+			printf("Chave nao econtrada!\n");
+		}
+		
+		fclose(arquivo);
+		fclose(newfile);
+		remove(tipo_var->nome_t);
+		rename("newfile",tipo_var->nome_t);
+		printf("Deseja editar outra linha: s-sim n-nao\n");
+		scanf(" %c",&opc);
+	}
 	free(tipo_var->nome_t);
 	free(tipo_var->valor_c);
 	free(tipo_var->chave);

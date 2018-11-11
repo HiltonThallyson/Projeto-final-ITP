@@ -19,6 +19,22 @@ int valida_chave(char *chave){
 	}	
 }
 
+int valida_float(char *valor){
+	int i,n=0,ponto=0;		
+	for(i=0;i<strlen(valor);i++){//percorre cada caractere da string chave até ante do \0
+		if(isdigit(valor[i])!=0){//se o char for um digito, o contato recebe ele mesmo + 1
+			n++;
+		}else if(valor[i]=='.'){
+			ponto++;
+		}
+	}
+	if(n==strlen(valor)||(n==strlen(valor)-1&&ponto==1)){
+		return 1;
+	}else{
+		return 0;
+	}	
+}
+
 void criar_l(){
 	FILE *arquivo;
 	char opc = 's';
@@ -108,14 +124,32 @@ void criar_l(){
 		while (i!=h-1){
 			printf("Digite o valor da coluna(%s):",nome_colunas[i]);
 			if (strcmp(tipos[i],"int")==0){
-				scanf("%d",&tipo_var->valor_i);
-				fprintf(arquivo, "%d|",tipo_var->valor_i);
+				do{
+					scanf("%s",tipo_var->valor_c);
+					r = valida_chave(tipo_var->valor_c);
+					if(r==0){
+						printf("tipo invalido! Digite o valor da coluna(%s):",nome_colunas[i]);
+					}
+				}while(r==0);
+					fprintf(arquivo, "%s|",tipo_var->valor_c);
 			}else if(strcmp(tipos[i],"float")==0){
-				scanf("%f",&tipo_var->valor_f);
-				fprintf(arquivo, "%f|",tipo_var->valor_f);
+				do{
+					scanf("%s",tipo_var->valor_c);
+					r = valida_float(tipo_var->valor_c);
+					if(r==0){
+						printf("tipo invalido! Digite o valor da coluna(%s):",nome_colunas[i]);
+					}
+				}while(r==0);
+					fprintf(arquivo, "%s|",tipo_var->valor_c);
 			}else if(strcmp(tipos[i],"double")==0){
-				scanf("%lf",&tipo_var->valor_d);
-				fprintf(arquivo, "%f|",tipo_var->valor_f);
+				do{
+					scanf("%s",tipo_var->valor_c);
+					r = valida_float(tipo_var->valor_c);
+					if(r==0){
+						printf("tipo invalido! Digite o valor da coluna(%s):",nome_colunas[i]);
+					}
+				}while(r==0);
+					fprintf(arquivo, "%s|",tipo_var->valor_c);
 			}else if(strcmp(tipos[i],"char")==0){
 				scanf("%s",tipo_var->valor_c);
 				fprintf(arquivo, "%s|",tipo_var->valor_c);
