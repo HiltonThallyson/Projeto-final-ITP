@@ -14,7 +14,7 @@ int valida_chave(char chave[6]){
 		return 0;
 	}	
 }
-int valida_float(char valor[6]){
+int valida_float(char *valor){
 	int i,n=0,ponto=0;		
 	for(i=0;i<strlen(valor);i++){//percorre cada caractere da string chave até ante do \0
 		if(isdigit(valor[i])!=0){//se o char for um digito, o contato recebe ele mesmo + 1
