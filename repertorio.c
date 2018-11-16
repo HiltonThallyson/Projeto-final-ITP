@@ -31,6 +31,25 @@ int valida_float(char *valor){
 	}	
 }
 
+int valida_tab(char *nome_tab){
+	FILE *bd;
+	bd = fopen("BD-ITP","r");
+	char string[300];
+	char temp[300];
+	int tem_coluna = 0;
+
+	fgets(string,300,bd);
+	while(fgets(string,300,bd)){
+		strcpy(temp,nome_tab);
+		strcat(temp,"\n\0");
+		//printf("|%d| Tabela |%s|",strcmp(string,temp),string);
+		if(strcmp(string,temp)==0){
+			tem_coluna++;
+		}
+	}
+	fclose(bd);
+	return tem_coluna;	
+}
 
 //leitura de valores
 int valor_i = 0;//variavel que armazenará o conteudo da coluna caso o usuario escolha a coluna do tipo inteiro
