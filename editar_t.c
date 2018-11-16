@@ -120,7 +120,8 @@ void editar_t(){
 						}while(r==0);
 						fprintf(newfile, "%s|",tipo_var->valor_c);
 					}else if(strcmp(tipos[i],"char")==0){
-						scanf("%s",tipo_var->valor_c);
+						getchar();
+						scanf("%[^\n]s",tipo_var->valor_c);
 						fprintf(newfile, "%s|",tipo_var->valor_c);
 					}
 					i++;
