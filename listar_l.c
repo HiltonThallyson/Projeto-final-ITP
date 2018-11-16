@@ -42,7 +42,6 @@ void listar_l(){
 		while(valida_tab(tipo_var->nome_t)==0){
 			printf("Tabela não existe!! Selecione a tabela: ");
 			scanf("%s",tipo_var->nome_t);
-	
 		}
 		arquivo = fopen(tipo_var->nome_t,"r");
 		if (arquivo == NULL){
@@ -56,6 +55,7 @@ void listar_l(){
 		printf("Deseja listar outra tabela? (s/n)\n");
 		scanf(" %c", &opc);
 	}
-
 	fclose(arquivo);
+	free(tipo_var->nome_t);
+	free(tipo_var);
 }
