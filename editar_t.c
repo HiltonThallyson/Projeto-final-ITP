@@ -7,6 +7,7 @@
 
 int valida_chave(char *chave);
 int valida_float(char *valor);
+int valida_tab(char *nome_tab);
 
 void editar_t(){
 	FILE *arquivo;//arquivo original a ser lido;
@@ -28,6 +29,10 @@ void editar_t(){
 	tipo_var->nome_t = malloc(sizeof(char)*100);
 	scanf("%s",tipo_var->nome_t);
 	printf("\n");
+	while(valida_tab(tipo_var->nome_t)==0){
+		printf("Tabela não existe!! Selecione a tabela: ");
+		scanf("%s",tipo_var->nome_t);
+	}
 	arquivo = fopen(tipo_var->nome_t,"r");
 	if (arquivo == NULL){
 		printf("Erro na abertura do arquivo!");
