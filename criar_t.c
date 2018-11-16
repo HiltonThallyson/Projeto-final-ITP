@@ -10,18 +10,46 @@ void criar_t(){
 	variaveis *tipo_var = malloc(sizeof(variaveis));
 	char opc;//armazena opcao do usuario de adicionar ou não mais uma coluna à tabela
 	char *tipo_c;
+	char string[50];
+	char *temp;
+	char repete = 's';
 
 	printf("---------Criando nova tabela---------\n");
-	printf("Digite o nome da tabela: ");
-	tipo_var->nome_t = malloc(sizeof(char)*100);
-	scanf("%s",tipo_var->nome_t);//armazena o nome da nova tabela, tendo de ser um nome simples sem espaços
-	printf("\n");
-	arquivo = fopen(tipo_var->nome_t,"a");//abre arquivo nome_arquivo para anexar, caso ainda não exista é criado e se existe, o texto
-	//é adicionado ao final do arquivo
-	bd = fopen("BD-ITP", "a");//abre arquivo nome_arquivo para anexar, caso ainda não exista é criado e se existe, o texto
-	//é adicionado ao final do arquivo
-	fprintf(bd, "|%s|\n", tipo_var->nome_t);//adiciona esta linha no final do arquivo (bd), nome_t
+	while(repete == 's'){
+		printf("Digite o nome da tabela: ");
+		tipo_var->nome_t = malloc(sizeof(char)*100);
+		scanf("%s",tipo_var->nome_t);//armazena o nome da nova tabela, tendo de ser um nome simples sem espaços
+		printf("\n");
+		//é adicionado ao final do arquivo
+		bd = fopen("BD-ITP", "r");//abre arquivo nome_arquivo para anexar, caso ainda não exista é criado e se existe, o texto
+		//é adicionado ao final do arquivo
+
+		while (fgets(string,50,bd)){
+			temp = malloc(sizeof(char)*50);
+			for(int i=0; i<strlen(string)-1;i++){
+				temp[i] = string[i];
+			}
+			printf("tamanho de nome_t = %ld\n",strlen(tipo_var->nome_t));
+			printf("temp = %s\n",temp);
+			printf("tamanho temp = %ld\n", strlen(temp));
+			printf("strcmp = %d\n",strcmp(tipo_var->nome_t, temp));
+			if(strcmp(tipo_var->nome_t, temp)==0){
+				printf("Nome da tabela já existe no banco de dados!\n");
+				repete = 's';
+				break;
+			}else{
+				repete = 'n';
+			}
+			free(temp);
+		}
+		fclose(bd);
+		printf("repete = %c\n",repete);
+	}
+
+	bd = fopen("BD-ITP", "a");
+	fprintf(bd, "%s\n", tipo_var->nome_t);//adiciona esta linha no final do arquivo (bd), nome_t
 	fclose(bd);//fecha arquivo bd
+	arquivo = fopen(tipo_var->nome_t,"a");//abre arquivo nome_arquivo para anexar, caso ainda não exista é criado e se existe, o texto é adicionado ao final do arquivo
 	free(tipo_var->nome_t);
 
 	if(arquivo == NULL){//caso dê erro na abertura do arquivo, exibe a seguinte mensagem e sai do programa

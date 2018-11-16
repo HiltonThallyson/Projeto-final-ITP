@@ -24,7 +24,7 @@ int valida_float(char *valor){
 			ponto++;
 		}
 	}
-	if(n==strlen(valor)-1&&ponto==1){
+	if(n==strlen(valor) || (n==strlen(valor)-1&&ponto==1)){
 		return 1;
 	}else{
 		return 0;
