@@ -164,7 +164,8 @@ void criar_l(){
 				}while(r==0);
 					fprintf(arquivo, "%s|",tipo_var->valor_c);
 			}else if(strcmp(tipos[i],"char")==0){
-				scanf("%s",tipo_var->valor_c);
+				getchar();
+				scanf("%[^\n]s",tipo_var->valor_c);
 				fprintf(arquivo, "%s|",tipo_var->valor_c);
 			}
 			i++;
