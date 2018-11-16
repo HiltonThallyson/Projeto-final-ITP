@@ -4,6 +4,7 @@
 #include "funcoes.h"
 #include "structs.h"
 
+int valida_tab(char *nome_tab);
 
 void criar_c(){
 	FILE *arquivo;
@@ -21,6 +22,12 @@ void criar_c(){
 	tipo_var->nome_t = malloc(sizeof(char)*100);
 	scanf("%s",tipo_var->nome_t);
 	printf("\n");
+	
+	while(valida_tab(tipo_var->nome_t)==0){
+		printf("Tabela não existe!! Selecione a tabela: ");
+		scanf("%s",tipo_var->nome_t);	
+	}
+	
 	newfile = fopen("newfile","a+");
 	if (newfile == NULL){
 		printf("Erro na abertura do arquivo!");
