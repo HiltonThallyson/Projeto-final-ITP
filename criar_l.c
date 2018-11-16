@@ -5,6 +5,8 @@
 #include "funcoes.h"
 #include "structs.h"
 
+int valida_tab(char *nome_tab);
+
 int valida_chave(char *chave){
 	int i,n=0;		
 	for(i=0;i<strlen(chave);i++){//percorre cada caractere da string chave até ante do \0
@@ -53,6 +55,12 @@ void criar_l(){
 	tipo_var->nome_t = malloc(sizeof(char)*100);
 	scanf("%s",tipo_var->nome_t);
 	printf("\n");
+	
+	while(valida_tab(tipo_var->nome_t)==0){
+		printf("Tabela não existe!! Selecione a tabela: ");
+		scanf("%s",tipo_var->nome_t);	
+	}
+	
 	arquivo = fopen(tipo_var->nome_t,"r");
 	if (arquivo == NULL){
 		printf("Erro na abertura do arquivo!");
