@@ -62,7 +62,7 @@ void main(){
 					criar_l();
 					break;
 				case 3:
-					printf("indisponivel!\n");
+					criar_c();
 					break;
 				case 4:
 					listar_t();// chama a função de listar as tabelas do banco de dados.
