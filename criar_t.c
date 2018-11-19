@@ -29,10 +29,7 @@ void criar_t(){
 			for(int i=0; i<strlen(string)-1;i++){
 				temp[i] = string[i];
 			}
-			printf("tamanho de nome_t = %ld\n",strlen(tipo_var->nome_t));
-			printf("temp = %s\n",temp);
-			printf("tamanho temp = %ld\n", strlen(temp));
-			printf("strcmp = %d\n",strcmp(tipo_var->nome_t, temp));
+			
 			if(strcmp(tipo_var->nome_t, temp)==0){
 				printf("Nome da tabela já existe no banco de dados!\n");
 				repete = 's';
@@ -43,7 +40,7 @@ void criar_t(){
 			free(temp);
 		}
 		fclose(bd);
-		printf("repete = %c\n",repete);
+		
 	}
 
 	bd = fopen("BD-ITP", "a");
@@ -71,7 +68,7 @@ void criar_t(){
 			printf("Qual o tipo de dado a ser inserido na coluna:\n");
 			printf("int\nfloat\ndouble\nchar\n");
 			getchar();
-			scanf("%s", tipo_c);//usuario insere um dos inteiros indicados acima que corresponde a um dos 4 tipos primarios
+			scanf("%s", tipo_c);//usuario insere um dos tipos  indicados acima
 			printf("\n");
 			fprintf(arquivo,"%s<%s>|", tipo_var->nome_c, tipo_c);	
 			free(tipo_c);	
