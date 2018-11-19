@@ -13,7 +13,7 @@ int valida_tab(char *nome_tab){//função para testar se a tabela existe no banc
 	bd = fopen("BD-ITP","r");
 	char string[300];
 	char temp[300];
-	int tem_coluna = 0;
+	int tem_tabela = 0;
 
 	fgets(string,300,bd);
 	while(fgets(string,300,bd)){
@@ -21,11 +21,11 @@ int valida_tab(char *nome_tab){//função para testar se a tabela existe no banc
 		strcat(temp,"\n\0");
 		//printf("|%d| Tabela |%s|",strcmp(string,temp),string);
 		if(strcmp(string,temp)==0){
-			tem_coluna++;
+			tem_tabela++;
 		}
 	}
 	fclose(bd);
-	return tem_coluna;	
+	return tem_tabela;	
 }
 
 void listar_l(){
