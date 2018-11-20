@@ -13,6 +13,7 @@ void criar_c(){
 	char *temp;//string que recebe o valor da chave primaria;
 	char *tipo_c;
 	char opc = 's';
+	char str[300];
 	int n_de_colunas = 0, tem_coluna = 0;
 	variaveis *tipo_var = malloc(sizeof(variaveis));
 	tipo_var->valor_c = malloc(sizeof(char)*100);
@@ -54,8 +55,10 @@ void criar_c(){
 			printf("Digite o nome da coluna(sem espaços): ");
 			scanf("%s",tipo_var->nome_c);//armazena o nome da nova coluna que o usuário inseriu
 			printf("\n");
-			strcat(tipo_var->nome_c,"<");
-			if(strstr(string,tipo_var->nome_c)!= NULL){//checa se existe a coluna digitada dentro do arquivo 
+			str[0]='|';
+			strcat(str,tipo_var->nome_c);
+			strcat(str,"<");
+			if(strstr(string,str)!= NULL){//checa se existe a coluna digitada dentro do arquivo 
 				printf("Coluna ja existe!!\n");//caso exista, mostra a mensagem e muda o valor de tem_coluna para 1
 				tem_coluna = 1;
 			}else{
@@ -69,7 +72,7 @@ void criar_c(){
 				scanf("%s", tipo_c);//usuario insere um dos tipos indicados acima
 				printf("\n");
 
-				fprintf(newfile,"%s%s>|", tipo_var->nome_c, tipo_c);//coloca o nome da coluna e o tipo no arquivo temporario
+				fprintf(newfile,"%s<%s>|", tipo_var->nome_c, tipo_c);//coloca o nome da coluna e o tipo no arquivo temporario
 				n_de_colunas++;	//incrementa o numero de colunas adicionadas
 				fclose(newfile);//fecha o arquivo temporário para atualizá-lo
 				newfile = fopen("newfile", "r");//abre novamente o arquivo temporário, só que para leitura
