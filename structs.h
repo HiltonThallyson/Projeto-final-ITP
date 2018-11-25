@@ -12,4 +12,10 @@ typedef struct grupo_var{
 	char *chave;
 }variaveis;
 
+typedef struct tipos_valores_t{
+	int *valores_int;
+	float *valores_float;
+	double *valores_double;
+}tipos_valores;
+
 

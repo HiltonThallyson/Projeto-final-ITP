@@ -6,6 +6,7 @@
 #include "structs.h"
 
 int valida_tab(char *nome_tab);
+void listar_t();
 
 int valida_chave(char *chave){
 	int i,n=0;		
@@ -51,13 +52,19 @@ void criar_l(){
 	tipo_var->valor_c = malloc(sizeof(char)*100);
 	
 	//recebe o nome da tabela e abre o arquivo desejado;
-	printf("Selecione a tabela: ");
+	printf("Selecione a tabela\n");
+	listar_t();
+	printf("\n");
+	getchar();
 	tipo_var->nome_t = malloc(sizeof(char)*100);
 	scanf("%s",tipo_var->nome_t);
 	printf("\n");
 	
 	while(valida_tab(tipo_var->nome_t)==0){
-		printf("Tabela não existe!! Selecione a tabela: ");
+		printf("Tabela não existe!! Selecione a tabela:\n\n");
+		listar_t();
+		printf("\n");
+		getchar();
 		scanf("%s",tipo_var->nome_t);	
 	}
 	

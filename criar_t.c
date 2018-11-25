@@ -4,6 +4,8 @@
 #include "funcoes.h"
 #include "structs.h"
 
+void listar_t();
+
 void criar_t(){
 	FILE *arquivo;//arquivo utilizado para armazenar tanto as colunas quanto o conteudo de cada coluna
   	FILE *bd;//arquivo utilizado para armazenar o numero total de tabelas criadas no banco e os nomes de cada uma
@@ -14,9 +16,11 @@ void criar_t(){
 	char *temp;
 	char repete = 's';
 
-	printf("---------Criando nova tabela---------\n");
+	printf("-------------Criando nova tabela------------\n");
 	while(repete == 's'){
-		printf("Digite o nome da tabela: ");
+		listar_t();
+		printf("\n");
+		printf("Digite o nome da tabela:\t");
 		tipo_var->nome_t = malloc(sizeof(char)*100);
 		scanf("%s",tipo_var->nome_t);//armazena o nome da nova tabela, tendo de ser um nome simples sem espaços
 		printf("\n");
@@ -31,7 +35,7 @@ void criar_t(){
 			}
 			
 			if(strcmp(tipo_var->nome_t, temp)==0){
-				printf("Nome da tabela já existe no banco de dados!\n");
+				printf("Nome da tabela já existe no banco de dados!\n\n");
 				repete = 's';
 				break;
 			}else{
@@ -57,7 +61,7 @@ void criar_t(){
 		tipo_var->nome_c = malloc(sizeof(char)*100);
 		scanf("%s",tipo_var->nome_c);//armazena o nome da nova tabela, tendo de ser um nome simples sem espaços
 		printf("\n");
-		fprintf(arquivo,"|%s<unsigned int>|",tipo_var->nome_c);
+		fprintf(arquivo,"|%s<int>|",tipo_var->nome_c);
 		printf("Deseja acrescentar uma nova coluna: (s/n)\n");
 		scanf(" %c", &opc);//armazena opção do usuario de adicionar ou não mais uma coluna
 		while(opc == 's'){

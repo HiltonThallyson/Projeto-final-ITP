@@ -7,3 +7,4 @@ void criar_l();
 void editar_t();
 void criar_c();
 void listar_l();
+void pesquisar_t();

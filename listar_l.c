@@ -7,6 +7,7 @@
 
 int valida_chave(char *chave);
 int valida_float(char *valor);
+void listar_t();
 
 int valida_tab(char *nome_tab){//função para testar se a tabela existe no banco de dados
 	FILE *bd;
@@ -35,12 +36,18 @@ void listar_l(){
 	char opc = 's';//variavel que armazena a opcao de criar um nova linha ou nao;
 
 	while(opc == 's'){//enquanto o usuário quiser listar uma nova tabela:
-		printf("Selecione a tabela: ");
+		printf("Selecione a tabela:\n");
+		listar_t();
+		printf("\n");
+		getchar();
 		tipo_var->nome_t = malloc(sizeof(char)*100);
 		scanf("%s",tipo_var->nome_t);
 		printf("\n");
 		while(valida_tab(tipo_var->nome_t)==0){// chama a função para verificar se a tabela existe ou não no BD
-			printf("Tabela não existe!! Selecione a tabela: ");//caso não exista, pede ao usuário q insira um novo nome de tabela
+			printf("Tabela não existe!! Selecione a tabela:\n\n");//caso não exista, pede ao usuário q insira um novo nome de tabela
+			listar_t();
+			printf("\n");
+			getchar();
 			scanf("%s",tipo_var->nome_t);
 		}
 		arquivo = fopen(tipo_var->nome_t,"r");//abre o arquivo da tabela em modo leitura

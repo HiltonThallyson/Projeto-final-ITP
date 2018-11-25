@@ -5,6 +5,7 @@
 #include "structs.h"
 
 int valida_tab(char *nome_tab);
+void listar_t();
 
 void criar_c(){
 	FILE *arquivo;
@@ -19,14 +20,20 @@ void criar_c(){
 	tipo_var->valor_c = malloc(sizeof(char)*100);
 
 	//recebe o nome da tabela e abre o arquivo desejado;
-	printf("Selecione a tabela: ");
+	printf("Selecione a tabela:\n");
+	listar_t();
+	printf("\n");
 	tipo_var->nome_t = malloc(sizeof(char)*100);
 	scanf("%s",tipo_var->nome_t);
 	printf("\n");
 	//Pede ao usuário o nome da tabela até obter um nome de tabela que existe
 	while(valida_tab(tipo_var->nome_t)==0){
-		printf("Tabela não existe!! Selecione a tabela: ");
-		scanf("%s",tipo_var->nome_t);	
+		printf("Tabela não existe!! Selecione a tabela:\n\n");
+		listar_t();
+		printf("\n");
+		getchar();
+		scanf("%s",tipo_var->nome_t);
+		printf("\n");	
 	}
 	//abre o arquivo temporário para escrita
 	newfile = fopen("newfile","w+");
