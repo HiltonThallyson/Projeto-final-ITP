@@ -238,7 +238,6 @@ void pesquisar_t(){
 							}
 						}
 						printf("\n\n");
-						k=0;
 						free(valores_tipos->valores_float);
 					}else if(strcmp(tipo_valor,"double") == 0){
 						for(k ; k<n_de_linhas; k++){
@@ -275,11 +274,6 @@ void pesquisar_t(){
 						}
 						printf("\n\n");
 						free(valores_tipos->valores_float);
-						for(k ; k<n_de_linhas; k++){
-							if(valores_tipos->valores_float[k] >= tipo_var->valor_f){
-								printf("%f\t", valores_tipos->valores_float[k]);
-							}
-						}
 					}else if(strcmp(tipo_valor,"double") == 0){
 						for(k ; k<n_de_linhas; k++){
 							if(valores_tipos->valores_double[k] == tipo_var->valor_d){
@@ -315,11 +309,6 @@ void pesquisar_t(){
 						}
 						printf("\n\n");
 						free(valores_tipos->valores_float);
-						for(k ; k<n_de_linhas; k++){
-							if(valores_tipos->valores_float[k] >= tipo_var->valor_f){
-								printf("%f\t", valores_tipos->valores_float[k]);
-							}
-						}
 					}else if(strcmp(tipo_valor,"double") == 0){
 						for(k ; k<n_de_linhas; k++){
 							if(valores_tipos->valores_double[k] < tipo_var->valor_d){
@@ -355,11 +344,6 @@ void pesquisar_t(){
 						}
 						printf("\n\n");
 						free(valores_tipos->valores_float);
-						for(k ; k<n_de_linhas; k++){
-							if(valores_tipos->valores_float[k] >= tipo_var->valor_f){
-								printf("%f\t", valores_tipos->valores_float[k]);
-							}
-						}
 					}else if(strcmp(tipo_valor,"double") == 0){
 						for(k ; k<n_de_linhas; k++){
 							if(valores_tipos->valores_double[k] <= tipo_var->valor_d){
@@ -400,4 +384,5 @@ void pesquisar_t(){
 		free(valor_p);
 	}	
 	fclose(arquivo);	
+	free(tipo_var);
 }	
