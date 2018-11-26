@@ -379,10 +379,10 @@ void pesquisar_t(){
 			free(valores_colunas[k]);	
 		}
 		free(valores_colunas);
-		free(valores_tipos);
-		free(tipo_valor);
-		free(valor_p);
-	}	
+	}
+	free(valores_tipos);
+	free(tipo_valor);
+	free(valor_p);
 	fclose(arquivo);	
 	free(tipo_var);
 }	
