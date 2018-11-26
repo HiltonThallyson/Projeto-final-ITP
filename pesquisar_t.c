@@ -55,7 +55,6 @@ void pesquisar_t(){
 
 	tipos_valores *valores_tipos = malloc(sizeof(tipos_valores));
 	variaveis *tipo_var = malloc(sizeof(variaveis));
-	tipo_var->nome_c = malloc(sizeof(char)*100);
 	tipo_var->valor_c = malloc(sizeof(char)*100);
 	
 	//recebe o nome da tabela e abre o arquivo desejado;
@@ -77,7 +76,7 @@ void pesquisar_t(){
 	}
 
 	arquivo = fopen(tipo_var->nome_t, "r");
-
+	free(tipo_var->nome_t);
 	fgets(string,300,arquivo);
 	
 	for (i; i<strlen(string);i++){
@@ -114,10 +113,12 @@ void pesquisar_t(){
 	rewind(arquivo);
 	while(opc == 's'){//enquanto usuario quiser pesquisar novas colunas na tabela
 		valor_inv = 'n';
+		rewind(arquivo);
+		fgets(string,300,arquivo);
+		tipo_var->nome_c = malloc(sizeof(char)*100);
 		do{
 			i=0;
 			j=0;
-			fgets(string,300,arquivo);
 			printf("Colunas existentes:\t%s\n", string);//mostra opcoes de colunas
 			printf("Digite o nome da coluna a ser pesquisada:\t");
 			scanf("%s",tipo_var->nome_c);//recebe nome da coluna a ser pesquisada
@@ -194,6 +195,7 @@ void pesquisar_t(){
 							}
 						}
 						printf("\n\n");
+						free(valores_tipos->valores_int);
 					}else if(strcmp(tipo_valor,"float") == 0){
 						for(k ; k<n_de_linhas; k++){
 							if(valores_tipos->valores_float[k] > tipo_var->valor_f){
@@ -201,6 +203,7 @@ void pesquisar_t(){
 							}
 						}
 						printf("\n\n");
+						free(valores_tipos->valores_float);	
 					}else if(strcmp(tipo_valor,"double") == 0){
 						for(k ; k<n_de_linhas; k++){
 							if(valores_tipos->valores_double[k] > tipo_var->valor_d){
@@ -208,6 +211,7 @@ void pesquisar_t(){
 							}
 						}
 						printf("\n\n");
+						free(valores_tipos->valores_double);	
 					}else{
 						for(k; k < n_de_linhas; k++){
 							if(strcmp(valores_colunas[k],valor_p)>0){
@@ -226,6 +230,7 @@ void pesquisar_t(){
 							}
 						}
 						printf("\n\n");
+						free(valores_tipos->valores_int);
 					}else if(strcmp(tipo_valor,"float") == 0){
 						for(k ; k<n_de_linhas; k++){
 							if(valores_tipos->valores_float[k] >= tipo_var->valor_f){
@@ -233,6 +238,8 @@ void pesquisar_t(){
 							}
 						}
 						printf("\n\n");
+						k=0;
+						free(valores_tipos->valores_float);
 					}else if(strcmp(tipo_valor,"double") == 0){
 						for(k ; k<n_de_linhas; k++){
 							if(valores_tipos->valores_double[k] >= tipo_var->valor_d){
@@ -240,6 +247,7 @@ void pesquisar_t(){
 							}
 						}
 						printf("\n\n");
+						free(valores_tipos->valores_double);
 					}else{
 						for(k; k < n_de_linhas; k++){
 							if(strcmp(valores_colunas[k],valor_p)>=0){
@@ -258,6 +266,7 @@ void pesquisar_t(){
 							}
 						}
 						printf("\n\n");
+						free(valores_tipos->valores_int);
 					}else if(strcmp(tipo_valor,"float") == 0){
 						for(k ; k<n_de_linhas; k++){
 							if(valores_tipos->valores_float[k] == tipo_var->valor_f){
@@ -265,6 +274,12 @@ void pesquisar_t(){
 							}
 						}
 						printf("\n\n");
+						free(valores_tipos->valores_float);
+						for(k ; k<n_de_linhas; k++){
+							if(valores_tipos->valores_float[k] >= tipo_var->valor_f){
+								printf("%f\t", valores_tipos->valores_float[k]);
+							}
+						}
 					}else if(strcmp(tipo_valor,"double") == 0){
 						for(k ; k<n_de_linhas; k++){
 							if(valores_tipos->valores_double[k] == tipo_var->valor_d){
@@ -272,6 +287,7 @@ void pesquisar_t(){
 							}
 						}
 						printf("\n\n");
+						free(valores_tipos->valores_double);
 					}else{
 						for(k; k < n_de_linhas; k++){
 							if(strcmp(valores_colunas[k], valor_p) == 0){
@@ -290,6 +306,7 @@ void pesquisar_t(){
 							}
 						}
 						printf("\n\n");
+						free(valores_tipos->valores_int);
 					}else if(strcmp(tipo_valor,"float") == 0){
 						for(k ; k<n_de_linhas; k++){
 							if(valores_tipos->valores_float[k] < tipo_var->valor_f){
@@ -297,6 +314,12 @@ void pesquisar_t(){
 							}
 						}
 						printf("\n\n");
+						free(valores_tipos->valores_float);
+						for(k ; k<n_de_linhas; k++){
+							if(valores_tipos->valores_float[k] >= tipo_var->valor_f){
+								printf("%f\t", valores_tipos->valores_float[k]);
+							}
+						}
 					}else if(strcmp(tipo_valor,"double") == 0){
 						for(k ; k<n_de_linhas; k++){
 							if(valores_tipos->valores_double[k] < tipo_var->valor_d){
@@ -304,6 +327,7 @@ void pesquisar_t(){
 							}
 						}
 						printf("\n\n");
+						free(valores_tipos->valores_double);
 					}else{
 						for(k; k < n_de_linhas; k++){
 							if(strcmp(valores_colunas[k],valor_p) < 0){
@@ -322,6 +346,7 @@ void pesquisar_t(){
 							}
 						}
 						printf("\n\n");
+						free(valores_tipos->valores_int);
 					}else if(strcmp(tipo_valor,"float") == 0){
 						for(k ; k<n_de_linhas; k++){
 							if(valores_tipos->valores_float[k] <= tipo_var->valor_f){
@@ -329,6 +354,12 @@ void pesquisar_t(){
 							}
 						}
 						printf("\n\n");
+						free(valores_tipos->valores_float);
+						for(k ; k<n_de_linhas; k++){
+							if(valores_tipos->valores_float[k] >= tipo_var->valor_f){
+								printf("%f\t", valores_tipos->valores_float[k]);
+							}
+						}
 					}else if(strcmp(tipo_valor,"double") == 0){
 						for(k ; k<n_de_linhas; k++){
 							if(valores_tipos->valores_double[k] <= tipo_var->valor_d){
@@ -336,6 +367,7 @@ void pesquisar_t(){
 							}
 						}
 						printf("\n\n");
+						free(valores_tipos->valores_double);
 					}else{
 						for(k; k < n_de_linhas; k++){
 							if(strcmp(valores_colunas[k],valor_p) <= 0){
@@ -358,6 +390,14 @@ void pesquisar_t(){
 			printf("Deseja realizar nova pesquisa? s-sim n-nao\n");
 			scanf(" %c", &opc);
 		}
-		
-	}		
+		k=0;
+		for(k ; k<n_de_linhas; k++){
+			free(valores_colunas[k]);	
+		}
+		free(valores_colunas);
+		free(valores_tipos);
+		free(tipo_valor);
+		free(valor_p);
+	}	
+	fclose(arquivo);	
 }	
