@@ -26,7 +26,7 @@ void apagar_l(){
 	tipo_var->valor_c = malloc(sizeof(char)*100);
 
 	//recebe o nome da tabela e abre o arquivo desejado;
-	printf("Selecione a tabela: ");
+	printf("Selecione a tabela:\n");
 	listar_t();
 	tipo_var->nome_t = malloc(sizeof(char)*100);
 	scanf("%s",tipo_var->nome_t);
