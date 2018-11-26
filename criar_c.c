@@ -62,15 +62,22 @@ void criar_c(){
 			printf("Digite o nome da coluna(sem espaços): ");
 			scanf("%s",tipo_var->nome_c);//armazena o nome da nova coluna que o usuário inseriu
 			printf("\n");
+			strcpy(str," ");
 			str[0]='|';
 			strcat(str,tipo_var->nome_c);
 			strcat(str,"<");
-			if(strstr(string,str)!= NULL){//checa se existe a coluna digitada dentro do arquivo 
-				printf("Coluna ja existe!!\n");//caso exista, mostra a mensagem e muda o valor de tem_coluna para 1
+			while(strstr(string,str)!= NULL){//repete enquanto existir a coluna digitada dentro do arquivo/tabela 	
+				printf("Coluna ja existe!! Digite o nome da coluna(sem espaços): \n");//caso exista, mostra a mensagem e muda o valor de tem_coluna para 1
+				scanf("%s",tipo_var->nome_c);
 				tem_coluna = 1;
-			}else{
-				tem_coluna = 0;//caso contrário tem_coluna = 0
+				strcpy(str," ");
+				str[0]='|';
+				strcat(str,tipo_var->nome_c);
+				strcat(str,"<");
+				//printf("%s",str);
 			}
+			tem_coluna = 0;//como saiu do loop, o nome da coluna não existe na tabela, então tem_coluna = 0
+			
 			tipo_c = malloc(sizeof(char)*20);
 			if(tem_coluna == 0){//caso a coluna digitada não exista na tabela
 				printf("Qual o tipo de dado a ser inserido na coluna:\n");//pede o tipo do valor da coluna
