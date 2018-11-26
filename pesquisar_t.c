@@ -11,7 +11,7 @@ int valida_float(char *valor);
 void listar_t();
 
 //função que recebe o vetor de ponteiros valores_colunas e preenche com os valores da coluna escolhida pelo usuário
-void recebe_valor(char **valores_colunas, FILE *arquivo, int i, int n_de_linhas){
+void recebe_valor(char **valores_colunas, char **valor_linha, FILE *arquivo, int i, int n_de_linhas){
 	char *temp = malloc(sizeof(char)*300);
 	int cont, qtd_delim = 0, linha_atual = 0, cont_char = 0;
 	
@@ -29,6 +29,7 @@ void recebe_valor(char **valores_colunas, FILE *arquivo, int i, int n_de_linhas)
 				}
 			}
 		}
+		strcpy(valor_linha[linha_atual],temp);
 		linha_atual++;//incrementa a linha para pegar a outra string do vetor de strings;
 		cont_char = 0;//reseta contador
 		qtd_delim = 0;//reseta qtd_delim
@@ -49,6 +50,7 @@ void pesquisar_t(){
 	char **valores_colunas;//vetor que recebe os valores da coluna escolhida;
 	char *tipo_valor;
 	char *valor_p;
+	char **valor_linha;
 	int i = 0, j = 0, k = 0, t = 0, g = 0, h = 0, u = 0; // contadores;
 	int r = 0; // variavel que recebe o resultado dos testes de tipo;
 	int n_de_linhas = 0;
@@ -145,8 +147,11 @@ void pesquisar_t(){
 		for(j ; j< n_de_linhas; j++){
 			valores_colunas[j] = malloc(sizeof(char)*100);//aloca cada ponteiro do vetor valores_colunas para uma string
 		}
-
-		recebe_valor(valores_colunas, arquivo, i, n_de_linhas);//chama a função recebe_valor;
+		valor_linha = malloc(sizeof(char *)*n_de_linhas);
+		for(int y=0; y < n_de_linhas; y++){
+			valor_linha[y] = malloc(sizeof(char)*300);
+		}
+		recebe_valor(valores_colunas, valor_linha, arquivo, i, n_de_linhas);//chama a função recebe_valor;
 		rewind(arquivo);
 		j=0;
 		printf("Qual valor deseja procurar?\t");
@@ -194,7 +199,7 @@ void pesquisar_t(){
 					if(strcmp(tipo_valor,"int") == 0){
 						for(k ; k<n_de_linhas; k++){
 							if(valores_tipos->valores_int[k] > tipo_var->valor_i){
-								printf("%d\t", valores_tipos->valores_int[k]);//imprime os valores
+								printf("%s\t", valor_linha[k]);//imprime os valores
 							}
 						}
 						printf("\n\n");
@@ -202,7 +207,7 @@ void pesquisar_t(){
 					}else if(strcmp(tipo_valor,"float") == 0){
 						for(k ; k<n_de_linhas; k++){
 							if(valores_tipos->valores_float[k] > tipo_var->valor_f){
-								printf("%f\t", valores_tipos->valores_float[k]);
+								printf("%s\t", valor_linha[k]);
 							}
 						}
 						printf("\n\n");
@@ -210,7 +215,7 @@ void pesquisar_t(){
 					}else if(strcmp(tipo_valor,"double") == 0){
 						for(k ; k<n_de_linhas; k++){
 							if(valores_tipos->valores_double[k] > tipo_var->valor_d){
-								printf("%lf\t", valores_tipos->valores_double[k]);//imprime os valores
+								printf("%s\t", valor_linha[k]);//imprime os valores
 							}
 						}
 						printf("\n\n");
@@ -218,7 +223,7 @@ void pesquisar_t(){
 					}else{
 						for(k; k < n_de_linhas; k++){
 							if(strcmp(valores_colunas[k],valor_p)>0){
-								printf("%s\t", valores_colunas[k]);//imprime valores
+								printf("%s\t", valor_linha[k]);//imprime valores
 							}
 						}
 						printf("\n\n");
@@ -229,7 +234,7 @@ void pesquisar_t(){
 					if(strcmp(tipo_valor,"int") == 0){
 						for(k ; k<n_de_linhas; k++){
 							if(valores_tipos->valores_int[k] >= tipo_var->valor_i){
-								printf("%d\t", valores_tipos->valores_int[k]);
+								printf("%s\t", valor_linha[k]);
 							}
 						}
 						printf("\n\n");
@@ -237,7 +242,7 @@ void pesquisar_t(){
 					}else if(strcmp(tipo_valor,"float") == 0){
 						for(k ; k<n_de_linhas; k++){
 							if(valores_tipos->valores_float[k] >= tipo_var->valor_f){
-								printf("%f\t", valores_tipos->valores_float[k]);
+								printf("%s\t", valor_linha[k]);
 							}
 						}
 						printf("\n\n");
@@ -245,7 +250,7 @@ void pesquisar_t(){
 					}else if(strcmp(tipo_valor,"double") == 0){
 						for(k ; k<n_de_linhas; k++){
 							if(valores_tipos->valores_double[k] >= tipo_var->valor_d){
-								printf("%lf\t", valores_tipos->valores_double[k]);
+								printf("%s\t", valor_linha[k]);
 							}
 						}
 						printf("\n\n");
@@ -253,7 +258,7 @@ void pesquisar_t(){
 					}else{
 						for(k; k < n_de_linhas; k++){
 							if(strcmp(valores_colunas[k],valor_p)>=0){
-								printf("%s\t", valores_colunas[k]);
+								printf("%s\t", valor_linha[k]);
 							}
 						}
 						printf("\n\n");
@@ -264,7 +269,7 @@ void pesquisar_t(){
 					if(strcmp(tipo_valor,"int") == 0){
 						for(k ; k<n_de_linhas; k++){
 							if(valores_tipos->valores_int[k] == tipo_var->valor_i){
-								printf("%d\t", valores_tipos->valores_int[k]);
+								printf("%s\t", valor_linha[k]);
 							}
 						}
 						printf("\n\n");
@@ -272,7 +277,7 @@ void pesquisar_t(){
 					}else if(strcmp(tipo_valor,"float") == 0){
 						for(k ; k<n_de_linhas; k++){
 							if(valores_tipos->valores_float[k] == tipo_var->valor_f){
-								printf("%f\t", valores_tipos->valores_float[k]);
+								printf("%s\t", valor_linha[k]);
 							}
 						}
 						printf("\n\n");
@@ -280,7 +285,7 @@ void pesquisar_t(){
 					}else if(strcmp(tipo_valor,"double") == 0){
 						for(k ; k<n_de_linhas; k++){
 							if(valores_tipos->valores_double[k] == tipo_var->valor_d){
-								printf("%lf\t", valores_tipos->valores_double[k]);
+								printf("%s\t", valor_linha[k]);
 							}
 						}
 						printf("\n\n");
@@ -288,7 +293,7 @@ void pesquisar_t(){
 					}else{
 						for(k; k < n_de_linhas; k++){
 							if(strcmp(valores_colunas[k], valor_p) == 0){
-								printf("%s\t", valores_colunas[k]);
+								printf("%s\t", valor_linha[k]);
 							}
 						}
 						printf("\n\n");
@@ -299,7 +304,7 @@ void pesquisar_t(){
 					if(strcmp(tipo_valor,"int") == 0){
 						for(k ; k<n_de_linhas; k++){
 							if(valores_tipos->valores_int[k] < tipo_var->valor_i){
-								printf("%d\t", valores_tipos->valores_int[k]);
+								printf("%s\t", valor_linha[k]);
 							}
 						}
 						printf("\n\n");
@@ -307,7 +312,7 @@ void pesquisar_t(){
 					}else if(strcmp(tipo_valor,"float") == 0){
 						for(k ; k<n_de_linhas; k++){
 							if(valores_tipos->valores_float[k] < tipo_var->valor_f){
-								printf("%f\t", valores_tipos->valores_float[k]);
+								printf("%s\t", valor_linha[k]);
 							}
 						}
 						printf("\n\n");
@@ -315,7 +320,7 @@ void pesquisar_t(){
 					}else if(strcmp(tipo_valor,"double") == 0){
 						for(k ; k<n_de_linhas; k++){
 							if(valores_tipos->valores_double[k] < tipo_var->valor_d){
-								printf("%lf\t", valores_tipos->valores_double[k]);
+								printf("%s\t", valor_linha[k]);
 							}
 						}
 						printf("\n\n");
@@ -323,7 +328,7 @@ void pesquisar_t(){
 					}else{
 						for(k; k < n_de_linhas; k++){
 							if(strcmp(valores_colunas[k],valor_p) < 0){
-								printf("%s\t", valores_colunas[k]);
+								printf("%s\t", valor_linha[k]);
 							}
 						}
 						printf("\n\n");
@@ -334,7 +339,7 @@ void pesquisar_t(){
 					if(strcmp(tipo_valor,"int") == 0){
 						for(k ; k<n_de_linhas; k++){
 							if(valores_tipos->valores_int[k] <= tipo_var->valor_i){
-								printf("%d\t", valores_tipos->valores_int[k]);
+								printf("%s\t", valor_linha[k]);
 							}
 						}
 						printf("\n\n");
@@ -342,7 +347,7 @@ void pesquisar_t(){
 					}else if(strcmp(tipo_valor,"float") == 0){
 						for(k ; k<n_de_linhas; k++){
 							if(valores_tipos->valores_float[k] <= tipo_var->valor_f){
-								printf("%f\t", valores_tipos->valores_float[k]);
+								printf("%s\t", valor_linha[k]);
 							}
 						}
 						printf("\n\n");
@@ -350,7 +355,7 @@ void pesquisar_t(){
 					}else if(strcmp(tipo_valor,"double") == 0){
 						for(k ; k<n_de_linhas; k++){
 							if(valores_tipos->valores_double[k] <= tipo_var->valor_d){
-								printf("%lf\t", valores_tipos->valores_double[k]);
+								printf("%s\t", valor_linha[k]);
 							}
 						}
 						printf("\n\n");
@@ -358,7 +363,7 @@ void pesquisar_t(){
 					}else{
 						for(k; k < n_de_linhas; k++){
 							if(strcmp(valores_colunas[k],valor_p) <= 0){
-								printf("%s\t", valores_colunas[k]);
+								printf("%s\t", valor_linha[k]);
 							}
 						}
 						printf("\n\n");
@@ -382,6 +387,11 @@ void pesquisar_t(){
 			free(valores_colunas[k]);//libera as strings do vetor de strings	
 		}
 		free(valores_colunas);//libera o vetor de strings
+
+		for(k=0 ; k<n_de_linhas; k++){
+			free(valor_linha[k]);//libera as strings do vetor de strings	
+		}
+		free(valor_linha);//libera o vetor de strings
 		free(tipo_valor);
 		free(valor_p);
 	}
