@@ -75,6 +75,7 @@ void main(){
 					break;
 				case 7:
 					pesquisar_t();
+					break;
 				case 8:
 					apagar_l();
 					break;
