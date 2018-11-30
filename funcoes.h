@@ -9,3 +9,4 @@ void criar_c();
 void listar_l();
 void pesquisar_t();
 void apagar_l();
+void apagar_t();
