@@ -41,7 +41,7 @@ void apagar_t(){
 			printf("Tabela não existe!! Selecione a tabela: ");
 			scanf("%s",tipo_var->nome_t);
 		}
-		
+		bd = fopen("BD-ITP","r");
 		if (bd == NULL){
 			printf("Erro na abertura do arquivo!");
 			exit(1);
