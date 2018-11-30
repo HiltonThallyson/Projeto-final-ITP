@@ -29,7 +29,7 @@ void main(){
 	//faz um loop enquanto o usuário quiser executar operações.
 	do{
 		printf("Selecione a operacao desejada:\n");
-		printf("(1) - Criar nova tabela\n(2) - Acrescentar nova linha\n(3) - Acrescentar nova coluna\n(4) - Listar tabelas\n(5) - Editar tabelas\n(6) - Listar dados Tabela\n(7) - Pesquisar na tabela\n(8) - Apagar linha por PK\n(9) - Sair\n");
+		printf("(1) - Criar nova tabela\n(2) - Acrescentar nova linha\n(3) - Acrescentar nova coluna\n(4) - Listar tabelas\n(5) - Editar tabelas\n(6) - Listar dados Tabela\n(7) - Pesquisar na tabela\n(8) - Apagar linha por PK\n(9) - Apagar Tabela\n(0) - Sair\n");
 		scanf("%d", &opr);
 			switch(opr){//checa qual operação foi escolhida.
 				case 1:
@@ -80,6 +80,9 @@ void main(){
 					apagar_l();
 					break;
 				case 9:
+					apagar_t();
+					break;
+				case 0:
 					printf("Programa finalizado!\n");//sai do programa com exit(1).
 					exit(0);
 				default:
