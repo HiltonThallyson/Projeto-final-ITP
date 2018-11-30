@@ -39,7 +39,9 @@ void apagar_t(){
 		scanf("%s",tipo_var->nome_t);
 		printf("\n");
 		while(valida_tab(tipo_var->nome_t)==0){
-			printf("Tabela não existe!! Selecione a tabela: ");
+			printf("Tabela não existe!! Selecione a tabela:\n");
+			listar_t();
+			getchar();
 			scanf("%s",tipo_var->nome_t);
 		}
 		bd = fopen("BD-ITP","r");
