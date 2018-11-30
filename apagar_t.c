@@ -29,6 +29,7 @@ void apagar_t(){
 	if(ntabelas==0){
 		printf("Banco não tem tabelas!!\n");	
 	}
+	fclose(bd);
 	//enquanto o usuario quiser apagar tabelas ou enquanto existir tabelas no banco;
 	while (opc == 's'&&ntabelas>0){
 		//recebe o nome da tabela e abre o arquivo desejado;
@@ -76,7 +77,6 @@ void apagar_t(){
 			fclose(bd);//fecha arquivo original;
 			fclose(newbd);//fecha novo arquivo;
 			remove("BD-ITP");//remove o arquivo original;
-			remove(tipo_var->nome_t);
 			rename("newfile","BD-ITP");//renomeia o novo arquivo com o nome do original;
 			}
 			if(tem_tab==0||certeza=='n'){
@@ -84,6 +84,7 @@ void apagar_t(){
 				printf("Deseja apagar outra tabela: s-sim n-nao\n");
 				scanf(" %c",&opc);
 			}else if(tem_tab == 1&&certeza=='s'){
+				remove(tipo_var->nome_t);
 				printf("Tabela apagada!\n");
 				//caso tenha apagado a tabela com sucesso, pergunta se o usuario deseja apagar outra tabela;
 				//rewind(arquivo);
