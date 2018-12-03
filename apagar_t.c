@@ -80,21 +80,22 @@ void apagar_t(){
 			fclose(newbd);//fecha novo arquivo;
 			remove("BD-ITP");//remove o arquivo original;
 			rename("newfile","BD-ITP");//renomeia o novo arquivo com o nome do original;
-			}
-			if(tem_tab==0||certeza=='n'){
-				//caso n tenha encontrado a tabela no arquivo, ou desistiu de apagar a tabela anterior;
-				printf("Deseja apagar outra tabela: s-sim n-nao\n");
-				scanf(" %c",&opc);
-			}else if(tem_tab == 1&&certeza=='s'){
-				remove(tipo_var->nome_t);
-				printf("Tabela apagada!\n");
-				//caso tenha apagado a tabela com sucesso, pergunta se o usuario deseja apagar outra tabela;
-				//rewind(arquivo);
+			remove(tipo_var->nome_t);
+		}
+		if(tem_tab==0||certeza=='n'){
+			//caso n tenha encontrado a tabela no arquivo, ou desistiu de apagar a tabela anterior;
+			printf("Deseja apagar outra tabela: s-sim n-nao\n");
+			scanf(" %c",&opc);
+		}else if(tem_tab == 1&&certeza=='s'){
 			
-				printf("Deseja apagar outra tabela: s-sim n-nao\n");
-				scanf(" %c",&opc);
-				tem_tab == 0;
-			}
+			printf("Tabela apagada!\n");
+			//caso tenha apagado a tabela com sucesso, pergunta se o usuario deseja apagar outra tabela;
+			//rewind(arquivo);
+		
+			printf("Deseja apagar outra tabela: s-sim n-nao\n");
+			scanf(" %c",&opc);
+			tem_tab == 0;
+		}
 		free(tipo_var->nome_t);
 				
 		}

@@ -129,6 +129,11 @@ void editar_t(){
 					}else if(strcmp(tipos[i],"char")==0){
 						getchar();
 						scanf("%[^\n]s",tipo_var->valor_c);
+						while(strcmp(tipo_var->valor_c,"-")==0){
+							printf("Valor NULO! Digite outro valor!\n");
+							getchar();
+							scanf("%[^\n]s",tipo_var->valor_c);
+						}
 						fprintf(newfile, "%s|",tipo_var->valor_c);
 					}
 					i++;
